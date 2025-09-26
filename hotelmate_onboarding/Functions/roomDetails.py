@@ -51,7 +51,7 @@ def addRoomDetails(allRoomIdList, propertyId, header, roomDetails):
                     "noOfBed": 1,
                     "bedType": "King Size",
                     "floorName": x.split()[0],
-                    "floorNumber": mapDict[x.split()[0]],
+                    "floorNumber":  mapDict.get(x.split()[0], -1),
                     "available": True,
                     "roomId": roomID,
                     "roomStatus": "VACANT_READY"

@@ -1,6 +1,8 @@
 import requests
 import os
 from hotelmate_onboarding.helper import read_config
+from utils import get_business_subtype
+
 
 config = read_config()
 
@@ -68,7 +70,7 @@ def yearlyGenerateApi(propertyId, header, businessShortName, businessEmail, mobi
         "noOfBookOneReview": 0,
         "pointOfSaleList": [
         ],
-        "businessSubtype": "Hotels",
+        "businessSubtype": get_business_subtype(bussinessName),
         "propertyServicesList": [
         ],
         "nearbyAttractions": [

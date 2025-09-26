@@ -2,10 +2,12 @@ import json
 import requests
 import os
 from bookone_onboarding import helper
+from utils import get_business_subtype
 
 config = helper.read_config()
 
 s = requests.Session()
+
 
 
 def businessProfileUpdate(propertyId, businessName, businessShortName, businessEmail, mobileNumber, country, postcode, streetNumber, streetName, suburb, city, state, locality, longitude, latitude, seoName, googlePlaceId, gstNumber, managerFirstName, managerLastName, bankname,
@@ -15,6 +17,8 @@ def businessProfileUpdate(propertyId, businessName, businessShortName, businessE
         businessProfileUpdateApi = config['TestApi']['businessprofileupdateapi']
     elif os.environ['env_variable'] == 'PRODUCTION':
         businessProfileUpdateApi = config['ProductionApi']['businessprofileupdateapi']
+
+    businessSubType: str = get_business_subtype(businessName)
 
     payload = {
         "id": propertyId,
@@ -75,7 +79,7 @@ def businessProfileUpdate(propertyId, businessName, businessShortName, businessE
         ],"taxDetails": [
             {
                 "name": "GST",
-                "percentage": 12,
+                "percentage": 5,
                 "country": country,
                 "state": state,
                 "taxableAmount": 10000000,
@@ -84,12 +88,12 @@ def businessProfileUpdate(propertyId, businessName, businessShortName, businessE
                         {
                             "minAmount": 1,
                             "maxAmount": 1000,
-                            "percentage": 12
+                            "percentage": 5
                         },
                     {
                             "minAmount": 1001,
                             "maxAmount": 7500,
-                            "percentage": 12
+                            "percentage": 5
                         },
                     {
                             "minAmount": 7501,
@@ -121,7 +125,7 @@ def businessProfileUpdate(propertyId, businessName, businessShortName, businessE
         "noOfBookOneReview": 0,
         "sacCode": "",
         "fssaiRegNumber": "",
-        "businessSubtype": "Hotels",
+        "businessSubtype": businessSubType,
         "propertyServicesList": [
             {
 

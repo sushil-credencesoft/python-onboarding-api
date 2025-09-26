@@ -6,7 +6,6 @@ import logging
 from dotenv import load_dotenv
 load_dotenv(override=True)
 
-
 from bookone_onboarding.Functions.signUp import signUp
 from bookone_onboarding.Functions.login import login
 from bookone_onboarding.Functions.updateUser import updateUser
@@ -23,16 +22,20 @@ from bookone_onboarding.Functions.roomDetails import addRoomDetails
 from bookone_onboarding.Functions.addGST import addGST
 from bookone_onboarding.Functions.openDays import openDays
 from bookone_onboarding.Functions.taxDetails import addTaxDetails
-from bookone_onboarding.Functions.bsinessProfileModule import businessProfileUpdate
+from bookone_onboarding.Functions.businessProfileModule import businessProfileUpdate
 from bookone_onboarding.Functions.modeOfPayment import modeOfPayment
 from bookone_onboarding.Functions.checkBusinessShortName import checkBusinessShortName
 from bookone_onboarding.Functions.deleteUser_Property import delet_user_and_property
+import json
+import asyncio
+import os
+# from bookone_onboarding.main import BookOneDriverClass  # adjust import if needed
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-os.environ['env_variable'] = os.getenv("SERVER")
-logger.info(f" onboarding running in {os.getenv("SERVER")} environment.")
+os.environ['env_variable'] = os.getenv("SERVER", "PRODUCTION")
+logger.info(f" onboarding running in {os.getenv("SERVER", "PRODUCTION")} environment.")
 
 
 class BookOneDriverClass:
@@ -102,30 +105,30 @@ class BookOneDriverClass:
                 accountNumber = x['accountNumber']
                 swiftcode = x['swiftCode']
                 gstNumber = x['gstNumber'] if x.get('gstNumber') else 'N/A'
-                roomDetails = x['roomDetails']
-                extraChargePerPerson = x['extraPersonCharge']
+                # roomDetails = x['roomDetails']
+                # extraChargePerPerson = x['extraPersonCharge']
                 adminFirstName = x['adminFirstName'].title()
                 adminLastName = x['adminLastName'].title()
 
-                allRoomTypes = list(roomType.keys())
-                allFloors = list(roomDetails.keys())
+                # allRoomTypes = list(roomType.keys())
+                # allFloors = list(roomDetails.keys())
 
-                # Count rooms
-                count = {}
-                for floor in allFloors:
-                    for room in allRoomTypes:
-                        try:
-                            count[room] = count.get(room, 0) + len(roomDetails[floor][room]['room numbers'])
-                        except Exception as e:
-                            logger.warning(f"Room counting error: {e}")
-
-                totalRoomPrice = sum(int(roomType[c]['roomStandardPrice']) * count[c] for c in count)
-                totalNumOfRooms = sum(count.values())
-                pricePerNight = totalRoomPrice + (totalNumOfRooms * extraChargePerPerson)
-                pricePerWeek = pricePerNight * 7
-                pricePerFortNight = pricePerNight * 15
-                pricePerMonth = pricePerNight * 30
-            
+                # # Count rooms
+                # count = {}
+                # for floor in allFloors:
+                #     for room in allRoomTypes:
+                #         try:
+                #             count[room] = count.get(room, 0) + len(roomDetails[floor][room]['room numbers'])
+                #         except Exception as e:
+                #             logger.warning(f"Room counting error: {e}")
+                #
+                # totalRoomPrice = sum(int(roomType[c]['roomStandardPrice']) * count[c] for c in count)
+                # totalNumOfRooms = sum(count.values())
+                # pricePerNight = totalRoomPrice + (totalNumOfRooms * extraChargePerPerson)
+                # pricePerWeek = pricePerNight * 7
+                # pricePerFortNight = pricePerNight * 15
+                # pricePerMonth = pricePerNight * 30
+                #
                 logger.info(f"Signing up user with email {businessEmail}...")
                 signUpData, signUpStatusCode = signUp(businessEmail, password)
                 if signUpStatusCode == 226:
@@ -190,16 +193,16 @@ class BookOneDriverClass:
                 time.sleep(2)
 
                 logger.info("Adding room types...")
-                addRoom(propertyId, header, roomType, count)
+                # addRoom(propertyId, header, roomType, count)
                 time.sleep(2)
 
                 logger.info("Fetching room IDs...")
-                roomIdList = roomInformation(propertyId, header)
+                # roomIdList = roomInformation(propertyId, header)
                 logger.info(f"Room IDs: {roomIdList}")
                 time.sleep(2)
 
                 logger.info("Adding room details...")
-                addRoomDetails(roomIdList, propertyId, header, roomDetails)
+                # addRoomDetails(roomIdList, propertyId, header, roomDetails)
                 time.sleep(2)
 
                 logger.info("Generating yearly API data...")
@@ -210,11 +213,11 @@ class BookOneDriverClass:
                 time.sleep(2)
 
                 logger.info("Adding room plan...")
-                addRoomPlan(roomIdList, propertyId, header, roomType, extraChargePerPerson)
+                # addRoomPlan(roomIdList, propertyId, header, roomType, extraChargePerPerson)
                 time.sleep(2)
 
                 logger.info("Adding availability by date range...")
-                addAvailabilityByDateRange(roomIdList, propertyId, header, roomType, count)
+                # addAvailabilityByDateRange(roomIdList, propertyId, header, roomType, count)
                 time.sleep(2)
 
                 logger.info("Adding GST info...")
@@ -256,3 +259,24 @@ class BookOneDriverClass:
                 })
 
         return results
+
+
+if __name__ == "__main__":
+    # Load JSON data from file
+    json_file_path = r"C:\Users\swain\Desktop\Giithub\python-flask-content-gen-ai\bookone_onboarding\Data\hotelmate.json"
+
+    if not os.path.exists(json_file_path):
+        print(f"JSON file not found at: {json_file_path}")
+        exit(1)
+
+    with open(json_file_path, "r", encoding="utf-8") as f:
+        json_data = json.load(f)
+
+    # Initialize the driver with JSON data
+    driver = BookOneDriverClass(json_data)
+
+    # Run the async driverFunction
+    results = asyncio.run(driver.driverFunction())
+
+    # Print results in readable format
+    print(json.dumps(results, indent=2))

@@ -24,10 +24,21 @@ async def start_onboarding(data: OnboardingData):
         driver = HotelmateDriverClass([data.dict(by_alias=True)])
         results = await driver.driverFunction()
 
-        # Check for errors in results
-        if any(item.get("status") == "error" for item in results):
-            return JSONResponse(status_code=500, content={results[0]['results']})
-        return JSONResponse(status_code=200, content={results[0]['results']})
+        # # Check for errors in results
+        # if any(item.get("status") == "error" for item in results):
+        #     return JSONResponse(status_code=500, content={results[0]['results']})
+        # return JSONResponse(status_code=200, content={results[0]['results']})
+        # Check for errors safely
+        if any(isinstance(item, dict) and item.get("status") == "error" for item in results):
+            return JSONResponse(status_code=500, content={
+                "error": results[0] if isinstance(results[0], dict) else results[0]
+            })
+
+        # Return success safely
+        return JSONResponse(status_code=200, content={
+            "results": results[0] if isinstance(results[0], dict) else results
+        })
+
 
     except Exception as e:
         logger.error(f"Unexpected error: {e}", exc_info=True)
@@ -41,10 +52,20 @@ async def start_onboarding(data: OnboardingData):
         driver = BookOneDriverClass([data.dict(by_alias=True)])
         results = await driver.driverFunction()
 
-        # Check for errors in results
-        if any(item.get("status") == "error" for item in results):
-            return JSONResponse(status_code=500, content={results[0]['results']})
-        return JSONResponse(status_code=200, content={results[0]['results']})
+        # # Check for errors in results
+        # if any(item.get("status") == "error" for item in results):
+        #     return JSONResponse(status_code=500, content={results[0]['results']})
+        # return JSONResponse(status_code=200, content={results[0]['results']})
+        # Check for errors safely
+        if any(isinstance(item, dict) and item.get("status") == "error" for item in results):
+            return JSONResponse(status_code=500, content={
+                "error": results[0] if isinstance(results[0], dict) else results[0]
+            })
+        # Return success safely
+        return JSONResponse(status_code=200, content={
+            "results": results[0] if isinstance(results[0], dict) else results
+        })
+
 
     except Exception as e:
         logger.error(f"Unexpected error: {e}", exc_info=True)

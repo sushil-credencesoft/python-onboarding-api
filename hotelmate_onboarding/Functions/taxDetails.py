@@ -22,7 +22,7 @@ def addTaxDetails(serviceId, header, country, state):
     payload = [
         {
             "name": "CGST",
-            "percentage": 6,
+            "percentage": 2.5,
             "country": country,
             "state": state,
             "taxableAmount": 1000000,
@@ -31,12 +31,12 @@ def addTaxDetails(serviceId, header, country, state):
                     {
                         "minAmount": 1,
                         "maxAmount": 1000,
-                        "percentage": 6
+                        "percentage": 2.5
                     },
                 {
                         "minAmount": 1001,
                         "maxAmount": 7500,
-                        "percentage": 6
+                        "percentage": 2.5
                         },
                 {
                         "minAmount": 7501,
@@ -47,7 +47,7 @@ def addTaxDetails(serviceId, header, country, state):
         },
         {
             "name": "SGST",
-            "percentage": 6,
+            "percentage": 2.5,
             "country": country,
             "state": state,
             "taxableAmount": 1000000,
@@ -56,12 +56,12 @@ def addTaxDetails(serviceId, header, country, state):
                     {
                         "minAmount": 1,
                         "maxAmount": 1000,
-                        "percentage": 6
+                        "percentage": 2.5
                     },
                 {
                         "minAmount": 1001,
                         "maxAmount": 7500,
-                        "percentage": 6
+                        "percentage": 2.5
                         },
                 {
                         "minAmount": 7501,
@@ -72,7 +72,7 @@ def addTaxDetails(serviceId, header, country, state):
         },
         {
             "name": "IGST",
-            "percentage": 6,
+            "percentage": 2.5,
             "country": country,
             "state": state,
             "taxableAmount": 1000000,
@@ -81,12 +81,12 @@ def addTaxDetails(serviceId, header, country, state):
                     {
                         "minAmount": 1,
                         "maxAmount": 1000,
-                        "percentage": 12
+                        "percentage": 5
                     },
                 {
                         "minAmount": 1001,
                         "maxAmount": 7500,
-                        "percentage": 12
+                        "percentage": 5
                         },
                 {
                         "minAmount": 7501,

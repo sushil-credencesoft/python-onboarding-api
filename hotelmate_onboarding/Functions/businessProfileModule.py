@@ -2,6 +2,8 @@ import json
 import requests
 import os
 from hotelmate_onboarding.helper import read_config
+from utils import get_business_subtype
+
 
 config = read_config()
 
@@ -75,7 +77,7 @@ def businessProfileUpdate(propertyId, businessName, businessShortName, businessE
         ],"taxDetails": [
             {
                 "name": "GST",
-                "percentage": 12,
+                "percentage": 5,
                 "country": country,
                 "state": state,
                 "taxableAmount": 1000000,
@@ -84,12 +86,12 @@ def businessProfileUpdate(propertyId, businessName, businessShortName, businessE
                         {
                             "minAmount": 1,
                             "maxAmount": 1000,
-                            "percentage": 12
+                            "percentage": 5
                         },
                     {
                             "minAmount": 1001,
                             "maxAmount": 7500,
-                            "percentage": 12
+                            "percentage": 5
                         },
                     {
                             "minAmount": 7501,
@@ -121,7 +123,8 @@ def businessProfileUpdate(propertyId, businessName, businessShortName, businessE
         "noOfBookOneReview": 0,
         "sacCode": "",
         "fssaiRegNumber": "",
-        "businessSubtype": "Hotels",
+        "businessSubtype": get_business_subtype(businessName),
+
         "propertyServicesList": [
             {
 

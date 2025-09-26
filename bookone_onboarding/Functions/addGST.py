@@ -2,6 +2,7 @@ import json
 import requests
 import os
 from bookone_onboarding import helper
+from utils import get_business_subtype
 
 config = helper.read_config()
 
@@ -14,6 +15,8 @@ def addGST(propertyId, businessName, businessShortName, businessEmail, mobileNum
         add_GST_Api = config['TestApi']['addgstapi']
     elif os.environ['env_variable'] == 'PRODUCTION':
         add_GST_Api = config['ProductionApi']['addgstapi']
+
+    businessSubType: str = get_business_subtype(businessName)
 
     actutalPayload = {
         "id": propertyId,
@@ -77,21 +80,21 @@ def addGST(propertyId, businessName, businessShortName, businessEmail, mobileNum
         "taxDetails": [
             {
                 "name": "GST",
-                "percentage": 12,
+                "percentage": 5,
                 "country": country,
                 "state": state,
-                "taxableAmount": 10000000,
+                "taxableAmount": 100000,
                 "taxAmount": 120000,
                 "taxSlabsList": [
                         {
                             "minAmount": 1,
                             "maxAmount": 1000,
-                            "percentage": 12
+                            "percentage": 5
                         },
                     {
                             "minAmount": 1001,
                             "maxAmount": 7500,
-                            "percentage": 12
+                            "percentage": 5
                         },
                     {
                             "minAmount": 7501,
@@ -108,7 +111,7 @@ def addGST(propertyId, businessName, businessShortName, businessEmail, mobileNum
         "pointOfSaleList": [
 
         ],
-        "businessSubtype": "Hotels",
+        "businessSubtype": businessSubType,
         "propertyServicesList": [
 
         ],

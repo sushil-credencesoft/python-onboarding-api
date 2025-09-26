@@ -7,7 +7,6 @@ config = read_config()
 
 s = requests.Session()
 
-
 def signUp(businessEmail, password):
 
     userSingUpdata = {
@@ -34,13 +33,15 @@ def signUp(businessEmail, password):
         signupData = {'signUpStatusCode': signUpStatusCode,
                       'userId': userId}
         return signupData, signUpStatusCode
+
     elif signUpStatusCode == 226:
-        # findUserApiCall = s.get(
-        #     f'https://testapi.bookonelocal.co.nz/api-bookone/api/user/findByName/{businessEmail}/')
-        # data = findUserApiCall.content
-        # jsonData = json.loads(data)
-        # print(jsonData)
-        # userId = jsonData['id']
-        # signupData = {'signUpStatusCode': signUpStatusCode,
-        #               'userId': userId}
-        return 'Business Email Already exist!', signUpStatusCode
+        return {'message': 'Business Email Already exist!'}, signUpStatusCode
+
+    else:
+        # handle all other failures gracefully
+        try:
+            errorData = p.json()
+        except Exception:
+            errorData = p.text
+        return {'message': 'Sign up failed', 'details': errorData}, signUpStatusCode
+

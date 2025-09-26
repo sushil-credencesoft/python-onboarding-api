@@ -2,6 +2,7 @@ import json
 import requests
 import os
 from hotelmate_onboarding.helper import read_config
+from utils import get_business_subtype
 
 config = read_config()
 
@@ -81,7 +82,7 @@ def finishAPI(header, propertyId, businessName, businessShortName, businessEmail
         "pointOfSaleList": [
 
         ],
-        "businessSubtype": "Hotels",
+        "businessSubtype": get_business_subtype(businessName),
         "propertyServicesList": [
 
         ],

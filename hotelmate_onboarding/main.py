@@ -22,7 +22,7 @@ from hotelmate_onboarding.Functions.roomDetails import addRoomDetails
 from hotelmate_onboarding.Functions.addGST import addGST
 from hotelmate_onboarding.Functions.openDays import openDays
 from hotelmate_onboarding.Functions.taxDetails import addTaxDetails
-from hotelmate_onboarding.Functions.bsinessProfileModule import businessProfileUpdate
+from hotelmate_onboarding.Functions.businessProfileModule import businessProfileUpdate
 from hotelmate_onboarding.Functions.modeOfPayment import modeOfPayment
 from hotelmate_onboarding.Functions.checkBusinessShortName import checkBusinessShortName
 from hotelmate_onboarding.Functions.deleteUser_Property import delet_user_and_property
@@ -31,8 +31,8 @@ from hotelmate_onboarding.Functions.deleteUser_Property import delet_user_and_pr
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-os.environ['env_variable'] = os.getenv("SERVER")
-logger.info(f" onboarding running in {os.getenv("SERVER")} environment.")
+os.environ['env_variable'] = os.getenv("SERVER", "TEST")
+logger.info(f" onboarding running in {os.getenv("SERVER", "TEST")} environment.")
 
 
 class HotelmateDriverClass:
@@ -90,6 +90,7 @@ class HotelmateDriverClass:
                 suburb = x['subUrb']
                 businessType = x['BusinessType']
                 businessEmail = x['email']
+                email = x['email']
                 managerContactNumber = x['managerContactNo'].strip()
                 mobileNumber = x['mobile'].strip()
                 managerFirstName = x['managerFirstName'].title()
@@ -134,7 +135,13 @@ class HotelmateDriverClass:
                     logger.warning("Business Email Already exist!")
                     return "Business Email Already exist!"
 
-                userId = signUpData['userId']
+                if 'userId' in signUpData:
+                    userId = signUpData['userId']
+                    logger.info(f"User created successfully: {userId}")
+                else:
+                    logger.warning(f"User signup failed or already exists: {signUpData}")
+                    userId = None  # optional, if you want to use it later
+
                 logger.info(f"User created successfully: {userId}")
                 time.sleep(2)
 
@@ -169,7 +176,7 @@ class HotelmateDriverClass:
                 if finalShortName == '':
                     delet_user_and_property(header, propertyId)
                     logger.info("Duplicate short name. Property deleted.")
-                    return 
+                    return
 
                 logger.info("Updating property info...")
                 updateProperty(propertyId, businessName, finalShortName, businessEmail, mobileNumber,
@@ -242,11 +249,6 @@ class HotelmateDriverClass:
                 logger.info("Adding modes of payment...")
                 modeOfPayment(propertyId, header)
 
-                results.append({
-                    "businessEmail": businessEmail,
-                    "status": "success",
-                    "message": "Property onboarded successfully"
-                })
 
             except Exception as e:
                 logger.error(f"Error onboarding business {x.get('email')}: {e}", exc_info=True)
@@ -254,6 +256,8 @@ class HotelmateDriverClass:
                     "businessEmail": x.get('email', 'N/A'),
                     "status": "error",
                     "message": str(e)
+
                 })
 
         return results
+

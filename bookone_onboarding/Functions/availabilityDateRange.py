@@ -3,7 +3,6 @@ from datetime import date, timedelta
 from bookone_onboarding import helper
 import os
 
-
 config = helper.read_config()
 
 s = requests.Session()
@@ -12,7 +11,7 @@ s = requests.Session()
 def addAvailabilityByDateRange(allRoomIdList, propertyId, header, roomType, count):
 
     fromDate = date.today()
-    timeSpan = timedelta(days=10)
+    timeSpan = timedelta(days=367)
     # for 1 years
     toDate = fromDate+timeSpan
 

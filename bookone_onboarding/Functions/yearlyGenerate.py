@@ -1,6 +1,7 @@
 import requests
 import os
 from bookone_onboarding import helper
+from utils import get_business_subtype
 
 config = helper.read_config()
 
@@ -67,7 +68,7 @@ def yearlyGenerateApi(propertyId, header, businessShortName, businessEmail, mobi
         "pointOfSaleList": [
 
         ],
-        "businessSubtype": "Hotels",
+        "businessSubtype": get_business_subtype(bussinessName),
         "propertyServicesList": [
 
         ],
