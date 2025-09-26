@@ -1,0 +1,73 @@
+[
+    {
+        "BusinessName": "Hotel V5",
+        "adminFirstName": "Aniket",
+        "adminLastName": "Likhar",
+        "address": "187/14 New Waddo, Ashvem, Morjim Beach Road, Ashvem Beach, Morjim, Goa 403512, India",
+        "city": "Panaji",
+        "country": "India",
+        "locality": "hotels-in-goa",
+        "postcode": "403512",
+        "state": "Goa",
+        "streetName": "Morjim Beach Road",
+        "streetNumber": "",
+        "subUrb": "Morjim",
+        "BusinessType": "Accommodation",
+        "email": "hotelv5goa@gmail.com",
+        "facebook": "",
+        "fileName": "",
+        "instagram": "",
+        "managerContactNo": "+919860301300",
+        "managerEmailAddress": "",
+        "managerFirstName": "Vishnu",
+        "managerLastName": "Chaturvedi",
+        "mobile": "+919075301300",
+        "source": "",
+        "status": "",
+        "twitter": "",
+        "website": "",
+        "gstNumber": "",
+        "Longitude": "",
+        "Latitude": "",
+        "googlePlaceId": "",
+        "bankName": "",
+        "branchName": "",
+        "accountName": "",
+        "accountNumber": "",
+        "swiftCode": "",
+        "extraPersonCharge": 1700,
+        "roomType": {
+            "Deluxe Room": {
+                "roomStandardPrice": "1980",
+                "roomPlan": {
+                    "Deluxe Room Plan": "1980"
+                }
+            },
+            "Super Deluxe Room": {
+                "roomStandardPrice": "2200",
+                "roomPlan": {
+                    "Super Deluxe Room Plan": "2200"
+                }
+            }
+        },
+        "roomDetails": {
+            "First floor": {
+                "Deluxe Room": {
+                    "room numbers": [
+                        1,
+                        2
+                    ]
+                },
+                "Super Deluxe Room": {
+                    "room numbers": [
+                        3,
+                        4,
+                        5,
+                        6,
+                        7
+                    ]
+                }
+            }
+        }
+    }
+]

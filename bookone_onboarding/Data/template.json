@@ -1,0 +1,55 @@
+[
+  {
+    "BusinessName": "",
+    "adminFirstName": "",
+    "adminLastName": "",
+    "address": "",
+    "city": "",
+    "country": "India",
+    "locality": "",
+    "postcode": "",
+    "state": "",
+    "streetName": "",
+    "streetNumber": "",
+    "subUrb": "",
+    "BusinessType": "Accommodation",
+    "email": "",
+    "facebook": "",
+    "fileName": "",
+    "instagram": "",
+    "managerContactNo": "",
+    "managerEmailAddress": "",
+    "managerFirstName": "",
+    "managerLastName": "",
+    "mobile": "",
+    "source": "",
+    "status": "",
+    "twitter": "",
+    "website": "",
+    "gstNumber": "",
+    "Longitude": "",
+    "Latitude": "",
+    "googlePlaceId": "",
+    "bankName": "",
+    "branchName": "",
+    "accountName": "",
+    "accountNumber": "",
+    "swiftCode": "",
+    "extraPersonCharge": 500,
+    "roomType": {
+      "Room Type Name": {
+        "roomStandardPrice": "",
+        "roomPlan": {
+          "Room Type Plan Name": ""
+        }
+      }
+    },
+    "roomDetails": {
+      "First floor": {
+        "Room Type Name": {
+          "room numbers": []
+        }
+      }
+    }
+  }
+]

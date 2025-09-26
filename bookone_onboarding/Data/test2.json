@@ -1,0 +1,95 @@
+[
+    {
+        "BusinessName": "BookOne Testing",
+        "AccountManagerName": "",
+        "adminFirstName": "Parthiswar",
+        "adminLastName": "Dash",
+        "address": "Umtavaddo, Calangute - Baga Rd, Calangute, Goa 403516",
+        "city": "Calangute",
+        "country": "India",
+        "locality": "",
+        "postcode": "403516",
+        "state": "Goa",
+        "streetName": "Umtavaddo",
+        "streetNumber": "",
+        "subUrb": "Calangute - Baga Rd",
+        "BusinessType": "Accommodation",
+        "dataCollectedBy": "Satyajit_Rout",
+        "dataCollectedOn": "2023-01-17 12:27:26.280128",
+        "email": "hotelworld40@gmail.com",
+        "facebook": "",
+        "fileName": "",
+        "instagram": "",
+        "managerContactNo": "074474 38061",
+        "managerEmailAddress": "",
+        "managerFirstName": "Parthiswar",
+        "managerLastName": "Dash",
+        "mobile": "074474 38061",
+        "source": "Google",
+        "status": "Active",
+        "twitter": "",
+        "website": "",
+        "gstNumber": "123456789",
+        "Longitude": "123455545544",
+        "Latitude": "1234555",
+        "googlePlaceId": "1238723878973JJJJJJ",
+        "bankName": "SBI",
+        "branchName": "Bhonsor",
+        "accountName": "kumar satyajit",
+        "accountNumber": "127492739473927",
+        "swiftCode": "55555555",
+        "extraPersonCharge": 500,
+        "roomType": {
+            "single room": {
+                "roomStandardPrice": "1200",
+                "roomPlan": {
+                    "single room plan": "1200",
+                    "single room day plan": "2000",
+                    "single room night plan": "3000"
+                }
+            },
+            "double room": {
+                "roomStandardPrice": "1500",
+                "roomPlan": {
+                    "double room plan": "1200",
+                    "double room day plan": "2000",
+                    "double room night plan": "3000"
+                }
+            }
+        },
+        "roomDetails": {
+            "First floor": {
+                "single room": {
+                    "room numbers": [
+                        101,
+                        102,
+                        103
+                    ]
+                },
+                "double room": {
+                    "room numbers": [
+                        201,
+                        202,
+                        203
+                    ]
+                }
+            },
+            "Second floor": {
+                "single room": {
+                    "room numbers": [
+                        301,
+                        302,
+                        303
+                    ]
+                },
+                "double room": {
+                    "room numbers": [
+                        401,
+                        402,
+                        403
+                    ]
+                }
+            }
+        }
+    }
+]

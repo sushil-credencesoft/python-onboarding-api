@@ -1,0 +1,82 @@
+[
+    {
+        "BusinessName": "THM Reservation Propert101",
+        "adminFirstName": "THM Reservation10",
+        "adminLastName": "THMreserve101",
+        "address": "Karn Nag, India",
+        "city": "S",
+        "country": "India",
+        "locality": "hotels-in-sri",
+        "postcode": "190010",
+        "state": "",
+        "streetName": "",
+        "streetNumber": "3QJX",
+        "subUrb": "",
+        "BusinessType": "Accommodation",
+        "email": "wethm210@gmail.com",
+        "facebook": "",
+        "fileName": "",
+        "instagram": "",
+        "managerContactNo": "",
+        "managerEmailAddress": "",
+        "managerFirstName": "",
+        "managerLastName": "",
+        "mobile": "+9100000",
+        "source": "",
+        "status": "",
+        "twitter": "",
+        "website": "",
+        "gstNumber": "",
+        "Longitude": "74.79781562282228",
+        "Latitude": "34.0834537378762",
+        "googlePlaceId": "ChIJr-Fuh_aP4TgRHVPgrflj04U",
+        "bankName": "",
+        "branchName": "",
+        "accountName": "",
+        "accountNumber": "",
+        "swiftCode": "",
+        "extraPersonCharge": 1000,
+        "roomType": {
+            "Deluxe Single Room": {
+                "roomStandardPrice": "6820",
+                "roomPlan": {
+                    "Deluxe Single Room Plan": "6820"
+                }
+            },
+            "Deluxe Double Room": {
+                "roomStandardPrice": "8140",
+                "roomPlan": {
+                    "Deluxe Double Room Plan": "8140"
+                }
+            },
+            "Family Suite Room": {
+                "roomStandardPrice": "9460",
+                "roomPlan": {
+                    "Family Suite Room Plan": "9460"
+                }
+            }
+        },
+        "roomDetails": {
+            "First floor": {
+                "Deluxe Single Room": {
+                    "room numbers": [
+                        1,
+                        2
+                    ]
+                },
+                "Deluxe Double Room": {
+                    "room numbers": [
+                        3,
+                        4
+                    ]
+                },
+                "Family Suite Room": {
+                    "room numbers": [
+                        5,
+                        6
+                    ]
+                }
+            }
+        }
+    }
+]

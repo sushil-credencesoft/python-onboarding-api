@@ -1,0 +1,82 @@
+[
+    {
+        "BusinessName": "Hotel Best Inn Classic",
+        "adminFirstName": "Biswamohan",
+        "adminLastName": "Patnaik",
+        "address": "Plot No. 1676-2787, Near Patia Station Road, Mahabinayak Puram, Patia, Bhubaneswar, Odisha 751024, India",
+        "city": "Bhubaneswar",
+        "country": "India",
+        "locality": "hotels-in-bhubaneswar",
+        "postcode": "751030",
+        "state": "Odisha",
+        "streetName": "ITER College Rd",
+        "streetNumber": "9R5J+34",
+        "subUrb": "Bhubaneswar",
+        "BusinessType": "Accommodation",
+        "email": "birenkumarbehera1989@gmail.com",
+        "facebook": "",
+        "fileName": "",
+        "instagram": "",
+        "managerContactNo": "+918249012990",
+        "managerEmailAddress": "",
+        "managerFirstName": "Biren Kumar",
+        "managerLastName": "Behera",
+        "mobile": "+918249012990",
+        "source": "",
+        "status": "",
+        "twitter": "",
+        "website": "",
+        "gstNumber": "",
+        "Longitude": "85.80132966441812",
+        "Latitude": "20.254511435414297",
+        "googlePlaceId": "",
+        "bankName": "",
+        "branchName": "",
+        "accountName": "",
+        "accountNumber": "",
+        "swiftCode": "",
+        "extraPersonCharge": 500,
+        "roomType": {
+            "Suite Room": {
+                "roomStandardPrice": "2750",
+                "roomPlan": {
+                    "Suite Room Plan": "2750"
+                }
+            },
+            "Classic Room": {
+                "roomStandardPrice": "1320",
+                "roomPlan": {
+                    "Classic Room Plan": "1320"
+                }
+            }
+        },
+        "roomDetails": {
+            "First floor": {
+                "Suite Room": {
+                    "room numbers": [
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8
+                    ]
+                },
+                "Classic Room": {
+                    "room numbers": [
+                        9,
+                        10,
+                        11,
+                        12,
+                        13,
+                        14,
+                        15,
+                        16
+                    ]
+                }
+            }
+        }
+    }
+]
