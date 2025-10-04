@@ -1,1 +1,3 @@
 /venv
+*.pyc
+/hotelmate_onboarding/Functions/__pycache__
