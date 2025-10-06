@@ -1,11 +1,16 @@
-from dotenv import load_dotenv
-load_dotenv()
+import os
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 from typing import Optional
 from router.onboard import onboard
 from router.storage_router import storage_api
+from function.credential_builder import create_credentials_file
+
+
+create_credentials_file()
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "credentials.json"
+
 
 app = FastAPI(
     title="Automation Onboarding API",

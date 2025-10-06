@@ -3,8 +3,7 @@ import json
 import os
 import asyncio
 import logging
-from dotenv import load_dotenv
-load_dotenv(override=True)
+
 
 from hotelmate_onboarding.Functions.signUp import signUp
 from hotelmate_onboarding.Functions.login import login
