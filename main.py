@@ -8,9 +8,9 @@ from router.storage_router import storage_api
 from function.credential_builder import create_credentials_file
 
 
+# Create credentials file and set environment variable
 create_credentials_file()
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "credentials.json"
-
 
 app = FastAPI(
     title="Automation Onboarding API",
@@ -18,18 +18,23 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# Enable CORS
+# ✅ Fix CORS: allow all origins properly
+# If you truly want to expose API to all (no auth cookies etc.),
+# disable allow_credentials or dynamically set origins.
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_origins=["*"],            # Allow all origins
+    allow_credentials=False,        # Must be False when "*" is used
+    allow_methods=["*"],            # Allow all HTTP methods
+    allow_headers=["*"],            # Allow all headers
+    expose_headers=["*"],           # Explicitly expose all headers
 )
+
+# Include routers
 app.include_router(onboard)
 app.include_router(storage_api)
 
-# Pydantic model for request validation
+# Pydantic model for validation
 class Item(BaseModel):
     name: str = Field(..., example="Apple")
     price: float = Field(..., gt=0, example=1.99)
@@ -54,6 +59,4 @@ async def log_requests(request: Request, call_next):
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app="main:app", host="127.0.0.1", port=8000, reload=True)
-
-
+    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
