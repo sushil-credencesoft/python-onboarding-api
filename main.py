@@ -18,19 +18,42 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# ✅ Fix CORS: allow all origins properly
-# If you truly want to expose API to all (no auth cookies etc.),
-# disable allow_credentials or dynamically set origins.
+# ✅ CORS Configuration for specific domains and their subdomains
+origins = [
+    # Main domains
+    "https://bookone.io",
+    "https://thehotelmate.co",
+    "https://thehotelmate.in",
+    "https://thm-onboarding.bookone.io"
+    "https://uat.onboard.bookone.io"
+    "https://onboarding.bookonepms.com"
+    
+    # HTTP versions (if needed for development)
+    "http://bookone.io",
+    "http://thehotelmate.co",
+    "http://thehotelmate.in",
+    "http://api.thehotelmate.co",
+    
+    # Add specific subdomains if you know them
+    # "https://api.bookone.io",
+    # "https://admin.thehotelmate.co",
+    
+    # Development (remove in production)
+    "http://localhost:3000",
+    "http://localhost:5173",
+    "http://localhost:8080",
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],            # Allow all origins
-    allow_credentials=False,        # Must be False when "*" is used
+    allow_origins=origins,          # Your specific domains
+    allow_credentials=True,         # Now you can use cookies/auth
     allow_methods=["*"],            # Allow all HTTP methods
     allow_headers=["*"],            # Allow all headers
     expose_headers=["*"],           # Explicitly expose all headers
 )
 
-# Include routers
+# Include routers AFTER middleware
 app.include_router(onboard)
 app.include_router(storage_api)
 
@@ -54,6 +77,7 @@ def create_item(item: Item):
 @app.middleware("http")
 async def log_requests(request: Request, call_next):
     print(f"Incoming request: {request.method} {request.url}")
+    print(f"Origin: {request.headers.get('origin')}")
     response = await call_next(request)
     return response
 
