@@ -51,39 +51,8 @@ def addRoomPlan(allRoomIdList, propertyId, header, roomType, extraChargePerPerso
                 code = code + a[0].upper()
 
             finalCode = code + '-' + str(count)
-            effectiveTs = int(datetime.combine(effectiveDate, datetime.min.time()).timestamp() * 1000)
-            expiryTs = int(datetime.combine(expiryDate, datetime.min.time()).timestamp() * 1000)
-            # payload = {
-            #     "dayOfTheWeekList": [
-            #         "MONDAY",
-            #         "TUESDAY",
-            #         "WEDNESDAY",
-            #         "THURSDAY",
-            #         "FRIDAY",
-            #         "SATURDAY",
-            #         "SUNDAY"
-            #     ],
-            #     "status": "Open",
-            #     "maximumLengthOfStay": 999,
-            #     "minimumLengthOfStay": 1,
-            #     "restriction": "None",
-            #     "code": finalCode,
-            #     "name": x,
-            #     "minimumOccupancy": 2,
-            #     "maximumOccupancy": 3,
-            #     "extraChargePerPerson": int(extraChargePerPerson),
-            #     "noOfChildren": 0,
-            #     "extraChargePerChild3To5yrs": 0,
-            #     "extraChargePerChild": 0,
-            #     "effectiveDate": effectiveTs,
-            #     "expiryDate": expiryTs,
-            #     "currencyCode": "INR",
-            #     "amount": int(planName[x]),
-            #     "active": True,
-            #     "propertyId": propertyId,
-            #     "roomTypeId": roomId,
-            #     "deviationFromStandardPlan": 1
-            # }
+           
+
             payload = {
                 "dayOfTheWeekList": [
                     "MONDAY", "TUESDAY", "WEDNESDAY",
@@ -96,32 +65,23 @@ def addRoomPlan(allRoomIdList, propertyId, header, roomType, extraChargePerPerso
                 "code": finalCode,
                 "name": x,
                 "minimumOccupancy": 2,
-                "maximumOccupancy": 3,
+                "maximumOccupancy": 4,
                 "extraChargePerPerson": int(extraChargePerPerson),
                 "noOfChildren": 0,
                 "extraChargePerChild3To5yrs": 0,
                 "extraChargePerChild": 0,
-                "effectiveDate": effectiveTs,
-                "expiryDate": expiryTs,
+                "effectiveDate": effectiveDate.strftime("%Y-%m-%d"),
+                "expiryDate": expiryDate.strftime("%Y-%m-%d"),
                 "currencyCode": "INR",
                 "amount": int(planName[x]),
                 "active": True,
                 "propertyId": propertyId,
                 "roomTypeId": roomId,
-                "deviationFromStandardPlan": 1,
-
-                "applicableToOta": False,
-                "description": None,
+                "roomId": roomId,
+                "deviationFromStandardPlan": 50,
                 "occupancyBased": False,
                 "extraPersonChargeIncluded": False,
-                "isApplicableToOta": False,
-
-                "propertyServicesList": [],
-                "onedayPlan": None,
-                "otaPlanList": [],
-                "nonRoomPlan": None,
-                "checkoutPeriod": None,
-                "occupancyRates": {},
+                "isApplicableToOta": True
             }
 
             obj = {
