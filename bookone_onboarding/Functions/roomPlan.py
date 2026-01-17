@@ -51,7 +51,7 @@ def addRoomPlan(allRoomIdList, propertyId, header, roomType, extraChargePerPerso
                 code = code + a[0].upper()
 
             finalCode = code + '-' + str(count)
-           
+
 
             payload = {
                 "dayOfTheWeekList": [
