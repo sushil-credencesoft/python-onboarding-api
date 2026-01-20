@@ -24,9 +24,9 @@ origins = [
     "https://bookone.io",
     "https://thehotelmate.co",
     "https://thehotelmate.in",
-    "https://thm-onboarding.bookone.io"
-    "https://uat.onboard.bookone.io"
-    "https://onboarding.bookonepms.com"
+    "https://thm-onboarding.bookone.io",
+    "https://uat.onboard.bookone.io",
+    "https://onboarding.bookonepms.com",
     
     # HTTP versions (if needed for development)
     "http://bookone.io",
