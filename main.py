@@ -6,6 +6,8 @@ from typing import Optional
 from router.onboard import onboard
 from router.storage_router import storage_api
 from function.credential_builder import create_credentials_file
+from router.email_router import email_router
+
 
 
 # Create credentials file and set environment variable
@@ -56,6 +58,7 @@ app.add_middleware(
 # Include routers AFTER middleware
 app.include_router(onboard)
 app.include_router(storage_api)
+app.include_router(email_router)
 
 # Pydantic model for validation
 class Item(BaseModel):
