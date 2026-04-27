@@ -249,6 +249,13 @@ class HotelmateDriverClass:
                 logger.info("Adding modes of payment...")
                 modeOfPayment(propertyId, header)
 
+                results.append({
+                    "businessEmail": businessEmail,
+                    "status": "success",
+                    "propertyId": propertyId,
+                    "message": "Onboarding completed successfully"
+                })
+
 
             except Exception as e:
                 logger.error(f"Error onboarding business {x.get('email')}: {e}", exc_info=True)
