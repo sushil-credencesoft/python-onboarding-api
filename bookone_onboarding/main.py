@@ -246,7 +246,8 @@ class BookOneDriverClass:
                 results.append({
                     "businessEmail": businessEmail,
                     "status": "success",
-                    "message": "Property onboarded successfully"
+                    "propertyId": propertyId,
+                    "message": "Onboarding completed successfully"
                 })
 
             except Exception as e:
