@@ -24,9 +24,9 @@ origins = [
     "https://bookone.io",
     "https://thehotelmate.co",
     "https://thehotelmate.in",
-    "https://thm-onboarding.bookone.io"
-    "https://uat.onboard.bookone.io"
-    "https://onboarding.bookonepms.com"
+    "https://thm-onboarding.bookone.io",
+    "https://uat.onboard.bookone.io",
+    "https://onboarding.bookonepms.com",
     
     # HTTP versions (if needed for development)
     "http://bookone.io",
@@ -83,4 +83,4 @@ async def log_requests(request: Request, call_next):
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)

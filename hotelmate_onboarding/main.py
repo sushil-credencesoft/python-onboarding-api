@@ -4,7 +4,6 @@ import os
 import asyncio
 import logging
 
-
 from hotelmate_onboarding.Functions.signUp import signUp
 from hotelmate_onboarding.Functions.login import login
 from hotelmate_onboarding.Functions.updateUser import updateUser
@@ -25,6 +24,7 @@ from hotelmate_onboarding.Functions.businessProfileModule import businessProfile
 from hotelmate_onboarding.Functions.modeOfPayment import modeOfPayment
 from hotelmate_onboarding.Functions.checkBusinessShortName import checkBusinessShortName
 from hotelmate_onboarding.Functions.deleteUser_Property import delet_user_and_property
+
 # from Onboarding.Functions.addOrUpdate import addOrupdatePlan
 
 logging.basicConfig(level=logging.INFO)
@@ -145,7 +145,7 @@ class HotelmateDriverClass:
                 time.sleep(2)
 
                 updateUser(userId, businessType, businessEmail, password, businessName, mobileNumber, city,
-                        suburb, streetName, country, state, postcode, adminFirstName, adminLastName)
+                           suburb, streetName, country, state, postcode, adminFirstName, adminLastName)
                 time.sleep(2)
 
                 logger.info("Logging in...")
@@ -179,10 +179,10 @@ class HotelmateDriverClass:
 
                 logger.info("Updating property info...")
                 updateProperty(propertyId, businessName, finalShortName, businessEmail, mobileNumber,
-                            country, postcode, streetNumber, streetName, suburb, city, state, locality,
-                            longitude, latitude, seoName, pricePerNight, pricePerWeek, pricePerFortNight,
-                            pricePerMonth, allFloors, allRoomTypes, totalNumOfRooms, googlePlaceId, gstNumber,
-                            header)
+                               country, postcode, streetNumber, streetName, suburb, city, state, locality,
+                               longitude, latitude, seoName, pricePerNight, pricePerWeek, pricePerFortNight,
+                               pricePerMonth, allFloors, allRoomTypes, totalNumOfRooms, googlePlaceId, gstNumber,
+                               header)
                 time.sleep(2)
 
                 logger.info("Adding subscription...")
@@ -191,9 +191,9 @@ class HotelmateDriverClass:
 
                 logger.info("Finishing basic setup...")
                 finishAPI(header, propertyId, businessName, finalShortName, businessEmail, mobileNumber,
-                        country, postcode, streetNumber, streetName, suburb, city, state, locality,
-                        longitude, latitude, seoName, pricePerNight, pricePerWeek, pricePerFortNight,
-                        pricePerMonth, allFloors, allRoomTypes, totalNumOfRooms)
+                          country, postcode, streetNumber, streetName, suburb, city, state, locality,
+                          longitude, latitude, seoName, pricePerNight, pricePerWeek, pricePerFortNight,
+                          pricePerMonth, allFloors, allRoomTypes, totalNumOfRooms)
                 time.sleep(2)
 
                 logger.info("Adding room types...")
@@ -211,9 +211,9 @@ class HotelmateDriverClass:
 
                 logger.info("Generating yearly API data...")
                 yearlyGenerateApi(propertyId, header, finalShortName, businessEmail, mobileNumber,
-                                country, postcode, streetName, suburb, city, state, longitude, latitude,
-                                businessName, seoName, pricePerNight, pricePerWeek, pricePerFortNight,
-                                pricePerMonth, allFloors, allRoomTypes, totalNumOfRooms)
+                                  country, postcode, streetName, suburb, city, state, longitude, latitude,
+                                  businessName, seoName, pricePerNight, pricePerWeek, pricePerFortNight,
+                                  pricePerMonth, allFloors, allRoomTypes, totalNumOfRooms)
                 time.sleep(2)
 
                 logger.info("Adding room plan...")
@@ -226,9 +226,9 @@ class HotelmateDriverClass:
 
                 logger.info("Adding GST info...")
                 addGST(propertyId, businessName, finalShortName, businessEmail, mobileNumber, country,
-                    postcode, streetName, suburb, city, state, longitude, latitude, seoName, pricePerNight,
-                    pricePerWeek, pricePerFortNight, pricePerMonth, allFloors, allRoomTypes,
-                    totalNumOfRooms, header)
+                       postcode, streetName, suburb, city, state, longitude, latitude, seoName, pricePerNight,
+                       pricePerWeek, pricePerFortNight, pricePerMonth, allFloors, allRoomTypes,
+                       totalNumOfRooms, header)
                 time.sleep(2)
 
                 logger.info("Setting up business services...")
@@ -239,14 +239,19 @@ class HotelmateDriverClass:
 
                 logger.info("Updating business profile...")
                 businessProfileUpdate(propertyId, businessName, finalShortName, businessEmail, mobileNumber,
-                                    country, postcode, streetNumber, streetName, suburb, city, state,
-                                    locality, longitude, latitude, seoName, googlePlaceId, gstNumber,
-                                    managerFirstName, managerLastName, bankname, branchName, accountName,
-                                    accountNumber, swiftcode, header)
+                                      country, postcode, streetNumber, streetName, suburb, city, state,
+                                      locality, longitude, latitude, seoName, googlePlaceId, gstNumber,
+                                      managerFirstName, managerLastName, bankname, branchName, accountName,
+                                      accountNumber, swiftcode, header)
                 time.sleep(2)
 
                 logger.info("Adding modes of payment...")
                 modeOfPayment(propertyId, header)
+                results.append({
+                    "businessEmail": businessEmail,
+                    "status": "success",
+                    "propertyId": propertyId
+                })
 
 
             except Exception as e:
@@ -259,4 +264,3 @@ class HotelmateDriverClass:
                 })
 
         return results
-

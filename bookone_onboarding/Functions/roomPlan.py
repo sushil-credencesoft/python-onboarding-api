@@ -3,6 +3,8 @@ from datetime import date, timedelta
 import os
 from bookone_onboarding import helper
 import time
+from datetime import datetime
+
 
 config=helper.read_config()
 
@@ -22,79 +24,94 @@ def minimumPriceFunction(l):
 
     return returnList
 
-def addRoomPlan(allRoomIdList,propertyId,header,roomType,extraChargePerPerson):
 
+
+
+
+def addRoomPlan(allRoomIdList, propertyId, header, roomType, extraChargePerPerson):
     if os.environ['env_variable'] == 'TEST':
-        addRoomPlanApi=config['TestApi']['addroomplanapi']
-        otaApI=config['TestApi']['otaapi']
+        addRoomPlanApi = config['TestApi']['addroomplanapi']
+        otaApI = config['TestApi']['otaapi']
     elif os.environ['env_variable'] == 'PRODUCTION':
-        addRoomPlanApi=config['ProductionApi']['addroomplanapi']
-        otaApI=config['ProductionApi']['otaapi']
+        addRoomPlanApi = config['ProductionApi']['addroomplanapi']
+        otaApI = config['ProductionApi']['otaapi']
 
     effectiveDate = date.today()
     timeDiff = timedelta(days=30)
-    expiryDate = effectiveDate+timeDiff
+    expiryDate = effectiveDate + timeDiff
 
-    count=1
+    count = 1
     for i in range(len(allRoomIdList)):
-        planName=roomType[allRoomIdList[i]['type']]['roomPlan']
-        roomId=allRoomIdList[i]['id']
+        planName = roomType[allRoomIdList[i]['type']]['roomPlan']
+        roomId = allRoomIdList[i]['id']
 
         for x in planName:
-            code=''
+            code = ''
             for a in allRoomIdList[i]['type'].split():
-                code=code+a[0].upper()
+                code = code + a[0].upper()
 
-            finalCode=code+'-'+str(count)
-            payload={
-            "dayOfTheWeekList":[
-                "MONDAY",
-                "TUESDAY",
-                "WEDNESDAY",
-                "THURSDAY",
-                "FRIDAY",
-                "SATURDAY",
-                "SUNDAY"
-            ],
-            "status":"Open",
-            "maximumLengthOfStay":999,
-            "minimumLengthOfStay":1,
-            "restriction":"None",
-            "code":finalCode,
-            "name":x,
-            "minimumOccupancy":2,
-            "maximumOccupancy":4,
-            "extraChargePerPerson":extraChargePerPerson,
-            "noOfChildren":0,
-            "extraChargePerChild3To5yrs":0,
-            "extraChargePerChild":0,
-            "effectiveDate":str(effectiveDate),
-            "expiryDate":str(expiryDate),
-            "currencyCode":"INR",
-            "amount":planName[x],
-            "active":True,
-            "propertyId":propertyId,
-            "roomTypeId":roomId,
-            "deviationFromStandardPlan":0
+            finalCode = code + '-' + str(count)
+
+
+            payload = {
+                "dayOfTheWeekList": [
+                    "MONDAY", "TUESDAY", "WEDNESDAY",
+                    "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"
+                ],
+                "status": "Open",
+                "maximumLengthOfStay": 999,
+                "minimumLengthOfStay": 1,
+                "restriction": "None",
+                "code": finalCode,
+                "name": x,
+                "minimumOccupancy": 2,
+                "maximumOccupancy": 4,
+                "extraChargePerPerson": int(extraChargePerPerson),
+                "noOfChildren": 0,
+                "extraChargePerChild3To5yrs": 0,
+                "extraChargePerChild": 0,
+                "effectiveDate": effectiveDate.strftime("%Y-%m-%d"),
+                "expiryDate": expiryDate.strftime("%Y-%m-%d"),
+                "currencyCode": "INR",
+                "amount": int(planName[x]),
+                "active": True,
+                "propertyId": propertyId,
+                "roomTypeId": roomId,
+                "roomId": roomId,
+                "deviationFromStandardPlan": 50,
+                "occupancyBased": False,
+                "extraPersonChargeIncluded": False,
+                "isApplicableToOta": True
             }
-            obj={
-                'roomId':roomId,
-                'amount':planName[x],
-                'planName':x,
-                'planCode':finalCode
+
+            obj = {
+                'roomId': roomId,
+                'amount': int(planName[x]),
+                'planName': x,
+                'planCode': finalCode
             }
             allRoomIdAndPrices.append(obj)
-            editedAddRoomPlanApi=addRoomPlanApi.replace('{propertyId}',str(propertyId)).replace('{individualRoomId}',str(roomId))
+
+            editedAddRoomPlanApi = (
+                addRoomPlanApi
+                .replace('{propertyId}', str(propertyId))
+                .replace('{individualRoomId}', str(roomId))
+            )
+
+            print(f"Calling URL: {editedAddRoomPlanApi}")
+
+            print(editedAddRoomPlanApi, propertyId, roomId)
+            print(payload)
             roomPlanApiRes = s.post(
                 editedAddRoomPlanApi, json=payload, headers=header)
             roomPlanApiStatusCode = roomPlanApiRes.status_code
             print(roomPlanApiStatusCode)
-            if roomPlanApiStatusCode ==  201:
-                print('Add room plan api status code',roomPlanApiStatusCode,'for plan ',i+1)
-            count=count+1
-        
+            if roomPlanApiStatusCode == 201:
+                print('Add room plan api status code', roomPlanApiStatusCode, 'for plan ', i + 1)
+            count = count + 1
+
         time.sleep(5)
-        count=1
+        count = 1
     
 
     ######### Below commented code is for adding the OTA plan.Currently it is not in use. ################

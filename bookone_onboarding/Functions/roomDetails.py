@@ -29,7 +29,17 @@ def addRoomDetails(allRoomIdList, propertyId, header, roomDetails):
         'Seventh': '7th',
         'Eighth': '8th',
         'Ninth': '9th',
-        'Tenth': '10th'
+        'Tenth': '10th',
+        'Eleventh': '11th',
+        'Twelfth': '12th',
+        'Thirteenth': '13th',
+        'Fourteenth': '14th',
+        'Fifteenth': '15th',
+        'Sixteenth': '16th',
+        'Seventeenth': '17th',
+        'Eighteenth': '18th',
+        'Nineteenth': '19th',
+        'Twentieth': '20th'
     }
 
     uniqueList = []
