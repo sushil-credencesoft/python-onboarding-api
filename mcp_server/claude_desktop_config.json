@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "property-onboarding": {
+      "command": "C:\\Users\\KIIT\\Desktop\\python-onboarding-api\\Scripts\\python.exe",
+      "args": [
+        "C:\\Users\\KIIT\\Desktop\\GitHub\\python-onboarding-api\\mcp_server\\server.py"
+      ]
+    }
+  }
+}

@@ -1,5 +1,5 @@
 from pydantic import BaseModel, EmailStr, Field, RootModel
-from typing import Optional, Dict, List
+from typing import Optional, Dict, List, Union
 
 
 # Fix: Use RootModel for roomPlan
@@ -15,7 +15,7 @@ class RoomTypeDetail(BaseModel):
 
 # Fix: This field has an alias due to space in "room numbers"
 class FloorRoomDetails(BaseModel):
-    room_numbers: List[int] = Field(..., alias="room numbers")
+    room_numbers: List[Union[int, str]] = Field(..., alias="room numbers")
 
 
 # Fix: Use RootModel for roomDetails
