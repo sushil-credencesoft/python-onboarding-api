@@ -1,3 +1,19 @@
 /venv
 *.pyc
 /hotelmate_onboarding/Functions/__pycache__
+
+# Local secrets and generated credentials
+.env
+.env.*
+!.env.example
+gcp_key.json
+credentials.json
+
+# Python packaging/build artifacts
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+dist/
+build/
+*.egg-info/

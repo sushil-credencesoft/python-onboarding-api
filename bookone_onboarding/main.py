@@ -356,6 +356,7 @@ class BookOneDriverClass:
         if not hasattr(self, "state") or not self.state.get("roomIdList"):
             raise ValueError("Stage 2 must be completed before Stage 3.")
 
+
         st = self.state
         header = st["header"]
         propertyId = st["propertyId"]
