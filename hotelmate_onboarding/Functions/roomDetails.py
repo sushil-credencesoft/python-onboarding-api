@@ -87,9 +87,9 @@ def addRoomDetails(allRoomIdList, propertyId, header, roomDetails):
     uniqueList = []
 
     floors = list(roomDetails.keys())
-    sequence_count = 1
 
     for floor_key in floors:
+        sequence_count = 1
         floor_name, floor_number = resolve_floor(floor_key)
 
         room_types_on_floor = list(roomDetails[floor_key].keys())

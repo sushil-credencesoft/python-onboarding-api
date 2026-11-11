@@ -15,7 +15,7 @@ os.chdir(project_root)
 from dotenv import load_dotenv
 load_dotenv(project_root / ".env")
 
-from mcp.server.fastmcp import FastMCP
+from mcp.server.fastmcp import FastMCP, Context
 from mcp_server import tools
 
 # Initialize FastMCP Server (configured for 0.0.0.0:8000 so entire office network can access)
@@ -53,23 +53,118 @@ def preview_and_validate_property(property_data: dict) -> dict:
 
 
 @mcp.tool()
-async def onboard_bookone_property(property_data: dict) -> dict:
+async def onboard_bookone_stage1_account(property_data: dict, ctx: Context = None) -> dict:
     """
-    EXECUTE BOOKONE ONBOARDING:
-    Validates pre-flight conditions and executes the complete 17-step onboarding flow
-    in TEST environment. Returns a sanitized enterprise summary with propertyId.
+    STAGE 1 OF 3 FOR BOOKONE (RECOMMENDED):
+    Executes Steps 01 to 05 (Account sign up, profile setup, authentication, short name resolution,
+    and basic property info). Finishes in ~7 seconds.
+    Upon completion, output a brief update in chat and immediately call onboard_bookone_stage2_inventory.
     """
-    return await tools.onboard_bookone_property(property_data)
+    return await tools.onboard_bookone_stage1_account(property_data, ctx=ctx)
 
 
 @mcp.tool()
-async def onboard_hotelmate_property(property_data: dict) -> dict:
+async def onboard_bookone_stage2_inventory(property_id: int, ctx: Context = None) -> dict:
     """
-    EXECUTE THEHOTELMATE ONBOARDING:
-    Validates pre-flight conditions and executes onboarding for TheHotelMate
-    in TEST environment. Returns a sanitized enterprise summary with propertyId.
+    STAGE 2 OF 3 FOR BOOKONE:
+    Executes Steps 06 to 10 (Subscription activation, finish basic setup, room types, room IDs,
+    and floor mappings). Finishes in ~9 seconds.
+    Pass the 'propertyId' returned from Stage 1.
+    Upon completion, output a brief update in chat and immediately call onboard_bookone_stage3_finalize.
     """
-    return await tools.onboard_hotelmate_property(property_data)
+    return await tools.onboard_bookone_stage2_inventory(property_id, ctx=ctx)
+
+
+@mcp.tool()
+async def onboard_bookone_stage3_finalize(property_id: int, ctx: Context = None) -> dict:
+    """
+    STAGE 3 OF 3 FOR BOOKONE:
+    Executes Steps 11 to 18 (Yearly rate matrix, room plans, calendar availability, GST, taxes,
+    banking, payment modes, and property activation). Finishes in ~10 seconds.
+    Pass the 'propertyId' from Stage 1.
+
+    PRESENTATION GUIDELINES:
+    - Do NOT include or print an Audit Log table.
+    - Do NOT display any internal userId.
+    - Present the final completion card containing:
+      * Property Name
+      * Property ID
+      * Login Email
+      * Login URL (exact URL from response 'loginUrl')
+      * Access Notice: 'Password will be sent to you via Email or WhatsApp.'
+    """
+    return await tools.onboard_bookone_stage3_finalize(property_id, ctx=ctx)
+
+
+@mcp.tool()
+async def onboard_hotelmate_stage1_account(property_data: dict, ctx: Context = None) -> dict:
+    """
+    STAGE 1 OF 3 FOR THEHOTELMATE (RECOMMENDED):
+    Executes Steps 01 to 05 for TheHotelMate. Finishes in ~7 seconds.
+    Upon completion, output a brief update in chat and call onboard_hotelmate_stage2_inventory.
+    """
+    return await tools.onboard_hotelmate_stage1_account(property_data, ctx=ctx)
+
+
+@mcp.tool()
+async def onboard_hotelmate_stage2_inventory(property_id: int, ctx: Context = None) -> dict:
+    """
+    STAGE 2 OF 3 FOR THEHOTELMATE:
+    Executes Steps 06 to 10 for TheHotelMate. Finishes in ~9 seconds.
+    Pass the 'propertyId' returned from Stage 1.
+    Upon completion, output a brief update in chat and call onboard_hotelmate_stage3_finalize.
+    """
+    return await tools.onboard_hotelmate_stage2_inventory(property_id, ctx=ctx)
+
+
+@mcp.tool()
+async def onboard_hotelmate_stage3_finalize(property_id: int, ctx: Context = None) -> dict:
+    """
+    STAGE 3 OF 3 FOR THEHOTELMATE:
+    Executes Steps 11 to 17 for TheHotelMate. Finishes in ~10 seconds.
+    Pass the 'propertyId' from Stage 1.
+
+    PRESENTATION GUIDELINES:
+    - Do NOT include or print an Audit Log table.
+    - Do NOT display any internal userId.
+    - Present the final completion card containing:
+      * Property Name
+      * Property ID
+      * Login Email
+      * Login URL (exact URL from response 'loginUrl')
+      * Access Notice: 'Password will be sent to you via Email or WhatsApp.'
+    """
+    return await tools.onboard_hotelmate_stage3_finalize(property_id, ctx=ctx)
+
+
+@mcp.tool()
+async def onboard_bookone_property(property_data: dict, ctx: Context = None) -> dict:
+    """
+    EXECUTE BOOKONE ONBOARDING (All-in-One Batch Mode):
+    Executes all 18 onboarding steps in a single call.
+    Do NOT print an Audit Log table in the response. Output only the handover card:
+    - Property Name
+    - Property ID
+    - Login Email
+    - Login URL
+    - Access Notice: 'Password will be sent to you via Email or WhatsApp.'
+    """
+    return await tools.onboard_bookone_property(property_data, ctx=ctx)
+
+
+@mcp.tool()
+async def onboard_hotelmate_property(property_data: dict, ctx: Context = None) -> dict:
+    """
+    EXECUTE THEHOTELMATE ONBOARDING (All-in-One Batch Mode):
+    Executes all 17 onboarding steps in a single call.
+    Do NOT print an Audit Log table in the response. Output only the handover card:
+    - Property Name
+    - Property ID
+    - Login Email
+    - Login URL
+    - Access Notice: 'Password will be sent to you via Email or WhatsApp.'
+    """
+    return await tools.onboard_hotelmate_property(property_data, ctx=ctx)
 
 
 if __name__ == "__main__":

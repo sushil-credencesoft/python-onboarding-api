@@ -3,6 +3,7 @@ import requests
 import os
 from bookone_onboarding import helper
 from utils import get_business_subtype
+from bookone_onboarding.Functions.addSubscription import SUBSCRIPTION_LIST
 
 config = helper.read_config()
 
@@ -55,18 +56,7 @@ def finishAPI(header, propertyId, businessName, businessShortName, businessEmail
         "latitude": latitude,
         "businessType": "Accommodation",
         "plan": "Business Premium",
-        "subscriptionList": [
-            {
-                "name": "Booking Management",
-            },
-            {
-                "name": "Revenue Management",
-
-            },
-            {
-                "name": "Business Setup",
-            }
-        ],
+        "subscriptionList": [{"name": s} for s in SUBSCRIPTION_LIST],
         "verified": False,
         "seoFriendlyName": seoName,
         "imageList": [
